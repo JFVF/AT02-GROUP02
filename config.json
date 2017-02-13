@@ -1,0 +1,14 @@
+{
+  "user" : "administrator",
+  "password" : "P@ssw0rd",
+  "domain" : "group1",
+  "authentication" : "ldap",
+  "token" : "jwt ",
+  "application" : "application/json",
+  "contentType" : "Content-Type",
+  "authorization" : "Authorization",
+  "timeout" : 30000,
+  "server" : "192.168.0.11",
+  "protocol" : "https",
+  "port" : 4040
+}

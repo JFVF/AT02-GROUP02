@@ -1,0 +1,10 @@
+[
+	{
+		"id" : "57bb1d6cb2efeaa00690702a",
+		"username" : "administrator",
+		"expirationDate" : "2016-09-24T20:50:33.5525543Z",
+		"type" : "exchange",
+		"impersonate" : "false",
+		"Url" : "https://192.168.0.11:4040/services/57bb1d6cb2efeaa00690702a"
+	}
+]

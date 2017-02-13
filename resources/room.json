@@ -1,0 +1,42 @@
+[
+    {
+        "id" : "57bb1d6fb2efeaa00690702b",
+        "emailAddress" : "room001@group1.local",
+        "displayName" : "room001 room001",
+        "serviceId" : "57bb1d6cb2efeaa00690702a",
+        "enabled" : true,
+        "locationId" : null,
+        "customDisplayName" : "update Room 002",
+        "Url" : "https://192.168.0.11:4040/services/57bb1d6cb2efeaa00690702a/rooms/57bb1d6fb2efeaa00690702b"
+    },
+    {
+        "id" : "57bb1d6fb2efeaa00690702c",
+        "emailAddress" : "room002@group1.local",
+        "displayName" : "room002",
+        "serviceId" : "57bb1d6cb2efeaa00690702a",
+        "enabled" : true,
+        "locationId" : null,
+        "customDisplayName" : "update Room 002",
+        "Url" : "https://192.168.0.11:4040/services/57bb1d6cb2efeaa00690702a/rooms/57bb1d6fb2efeaa00690702c"
+    },
+    {
+        "id" : "57bb1d6fb2efeaa00690702d",
+        "emailAddress" : "room003@group1.local",
+        "displayName" : "room003",
+        "serviceId" : "57bb1d6cb2efeaa00690702a",
+        "enabled" : true,
+        "locationId" : null,
+        "customDisplayName" : "room003",
+        "Url" : "https://192.168.0.11:4040/services/57bb1d6cb2efeaa00690702a/rooms/57bb1d6fb2efeaa00690702d"
+    },
+    {
+        "id" : "57bb1d6fb2efeaa00690702e",
+        "emailAddress" : "room004@group1.local",
+        "displayName" : "room004",
+        "serviceId" : "57bb1d6cb2efeaa00690702a",
+        "enabled" : true,
+        "locationId" : null,
+        "customDisplayName" : "update Room 002",
+        "Url" : "https://192.168.0.11:4040/services/57bb1d6cb2efeaa00690702a/rooms/57bb1d6fb2efeaa00690702e"
+    }
+]

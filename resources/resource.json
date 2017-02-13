@@ -1,0 +1,12 @@
+{
+  "apk" : "/apk",
+  "login" : "/login",
+  "serviceTypes" : "/service-types",
+  "services" : "/services",
+  "rooms" : "/rooms",
+  "meeting" : "/meetings",
+  "outOfOrders" : "/out-of-orders",
+  "resources" : "/resources",
+  "locations" : "/locations",
+  "attendee" : "/attendees"
+}

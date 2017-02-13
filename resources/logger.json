@@ -1,0 +1,11 @@
+{
+  "logger" : {
+    "appenders" : [
+      {
+        "type": "file",
+        "filename": "logs/logFile.log",
+        "category": "logFile"
+      }
+    ]
+  }
+}
