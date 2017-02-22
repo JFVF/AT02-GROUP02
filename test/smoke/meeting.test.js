@@ -17,7 +17,7 @@ var length = 4;
 var startTime = 1;
 var endTime = 2;
 
-describe('Meetings Smoke Test:', function () {
+describe.skip('Meetings Smoke Test:', function () {
     this.timeout(config.timeout);
     var jsonCreateMeeting = {};
     var jsonPostMeeting = null;
@@ -32,17 +32,18 @@ describe('Meetings Smoke Test:', function () {
         room.getRoomByDefault(function (oneRoom) {
             roomId = oneRoom._id;
             serviceId = oneRoom.serviceId;
+            //console.log(oneRoom);
             jsonCreateMeeting = {
-                organizer: organizer,
+                organizer: 'Administrator',
                 title: title,
                 start: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
                 end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
                 location: location,
-                roomEmail: 'room001@group1.local',
-                resources: ["room001@group1.local"],
-                attendees: ["eviraka@group1.local"]
+                roomEmail: 'room1@jofo.local',
+                resources: ["room1@jofo.local"],
+                attendees: ["Administrator@jofo.local"]
             };
-            meeting.create(serviceId, roomId, jsonCreateMeeting, function (err, res) {
+            meeting.create(jsonCreateMeeting, function (err, res) {
                 jsonCreateMeeting = res.body;
                 expect(res.status).to.equal(status.OK);
                 done();
@@ -92,7 +93,7 @@ describe('Meetings Smoke Test:', function () {
         });
     });
 
-    it.only('POST /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
+    it('POST /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
         room.getRoomByDefault(function (oneRoom) {
             var roomIdPost = oneRoom._id;
             var serviceIdPost = oneRoom.serviceId;

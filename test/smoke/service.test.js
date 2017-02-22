@@ -11,14 +11,14 @@ var status = resourceManager.getStatus();
 describe('Service Smoke Test', function () {
 	this.timeout(config.timeout);
 	var servicePost = {};
-	var serviceJson = {  "username": "administrator",
-						 "hostname": "adds-exchange.group1.local",
-						 "password": "P@ssw0rd" };
+	var serviceJson = {  "username": config.userExchange,
+        "hostname": config.hostname,
+        "password": config.passwordExchange };
 
 	before(function(done){
 		service.get(function(err,res){
 			if (typeof res.body[0] !== 'undefined') {
-				service.getOneServiceExistent(function(oneService){
+				service.getDefaultService(function(oneService){
 					service.delete(oneService._id, function (err, res){
 				        expect(res.status).to.equal(status.OK);
 					        done();

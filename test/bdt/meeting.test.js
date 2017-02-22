@@ -8,7 +8,7 @@ var resourceManager = requireManager.getRequireResourceManager();
 /**Variables*/
 var meeting = endPointManager.getMeeting();
 var config = requireManager.getRequireConfig();
-var status = requireManager.getStatus();
+var status = resourceManager.getStatus();
 var room = endPointManager.getRoom();
 
 var length = 5;
@@ -35,7 +35,7 @@ describe('Meeting Bdt Test:', function () {
         var location = randomstring.generate({length: length, charset: 'alphabetic'});
         
         it('Given I have a room', function (done){
-            room.getRoomById(function(err, res){
+            room.getRoomByDefault(function(err, res){
                 roomObtenido = res.body;
                 expect(res.status).to.equal(status.OK);
                 done();

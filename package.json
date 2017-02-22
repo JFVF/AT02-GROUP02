@@ -4,7 +4,11 @@
   "description": "\ttest for AT01-JAJED",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha --recursive",
+    "smoke": "mocha test/smoke --recursive",
+    "acceptance": "mocha test/acceptance --recursive",
+    "bdt": "mocha test/bdt --recursive",
+    "workflow": "mocha test/workflow --recursive"
   },
   "author": "AT01-Team1-JAJED",
   "license": "ISC",
