@@ -1,14 +1,17 @@
 {
-  "user" : "administrator",
-  "password" : "P@ssw0rd",
-  "domain" : "group1",
-  "authentication" : "ldap",
+  "user": "admin",
+  "password": "jb&11235",
+  "userExchange" : "Administrator",
+  "passwordExchange" : "P@ssword",
+  "hostname":"at02ljofo01.jofo.local",
+  "domain" : "jofo",
+  "authentication" : "local",
   "token" : "jwt ",
   "application" : "application/json",
   "contentType" : "Content-Type",
   "authorization" : "Authorization",
   "timeout" : 30000,
-  "server" : "192.168.0.11",
+  "server" : "10.28.114.34",
   "protocol" : "https",
   "port" : 4040
 }
