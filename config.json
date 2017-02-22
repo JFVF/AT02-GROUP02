@@ -7,6 +7,9 @@
   "domain" : "jofo",
   "authentication" : "local",
   "token" : "jwt ",
+  "emailRoom":"room1@jofo.local",
+  "attendee":"Administrator@jofo.local",
+
   "application" : "application/json",
   "contentType" : "Content-Type",
   "authorization" : "Authorization",
