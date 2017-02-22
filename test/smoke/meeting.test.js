@@ -17,108 +17,103 @@ var length = 4;
 var startTime = 1;
 var endTime = 2;
 
-describe.skip('Meetings Smoke Test:', function () {
+describe.only('Meetings Smoke Test:', function () {
     this.timeout(config.timeout);
-    var jsonCreateMeeting = {};
     var jsonPostMeeting = null;
     var serviceId = 0;
     var roomId = 0;
 
-    var organizer = randomstring.generate({length: length, charset: 'alphabetic'});
     var title = randomstring.generate({length: length, charset: 'alphabetic'});
     var location = randomstring.generate({length: length, charset: 'alphabetic'});
 
-    beforeEach(function (done) {
+    jsonPostMeeting = {
+        organizer: config.userExchange,
+        title: title,
+        start: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        location: location,
+        roomEmail: config.emailRoom,
+        resources: [config.emailRoom],
+        attendees: [config.attendee]
+    };
+
+    before(function (done) {
         room.getRoomByDefault(function (oneRoom) {
             roomId = oneRoom._id;
             serviceId = oneRoom.serviceId;
-            //console.log(oneRoom);
-            jsonCreateMeeting = {
-                organizer: 'Administrator',
-                title: title,
-                start: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-                end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-                location: location,
-                roomEmail: 'room1@jofo.local',
-                resources: ["room1@jofo.local"],
-                attendees: ["Administrator@jofo.local"]
-            };
-            meeting.create(jsonCreateMeeting, function (err, res) {
-                jsonCreateMeeting = res.body;
-                expect(res.status).to.equal(status.OK);
-                done();
-            });
-        });
-    });
-
+            done();
+        })
+    })
     afterEach(function (done) {
-        if (jsonPostMeeting) {
-            meeting.delete(jsonPostMeeting._id, function (err, res) {
+        if (jsonPostMeeting._id) {
+            meeting.delete(serviceId, roomId, jsonPostMeeting._id, function (err, res) {
                 expect(res.status).to.equal(status.OK);
-                jsonPostMeeting = null;
                 done();
             });
+        } else {
+            done();
         }
-        meeting.delete(jsonCreateMeeting._id, function (err, res) {
-            expect(res.status).to.equal(status.OK);
-            done();
-        });
     });
-
-    it('GET/services/{serviceId}/rooms/{roomId}/meetings/{meetingId}', function (done) {
-        meeting.getById(jsonCreateMeeting._id, function (err, res) {
-            expect(res.status).to.equal(status.OK);
-            done();
+    context('POST test', function (done) {
+        it('POST /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
+            meeting.create(serviceId, roomId, jsonPostMeeting, function (err, res) {
+                jsonPostMeeting = res.body;
+                expect(res.status).to.equal(status.OK);
+                done();
+            });
         });
-    });
+    })
 
-    it('GET /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
-        meeting.get(function (err, res) {
-            expect(res.status).to.equal(status.OK);
-            done();
+
+    context('PUT / DELETE and GET test', function () {
+        beforeEach(function (done) {
+            meeting.create(serviceId, roomId, jsonPostMeeting, function (err, res) {
+                jsonPostMeeting = res.body;
+                expect(res.status).to.equal(status.OK);
+                done();
+            });
         });
-    });
 
-    it('PUT /services/{serviceId}/rooms/{roomId}/meetings/{meetingId}', function (done) {
-        var jsonUpdateMeeting = {
-            start: moment().add(time.ADDFROM, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-            end: moment().add(time.ADDTO, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-            title: title,
-            optionalAttendees: [],
-            attendees: ["eviraca@group1.local"]
-        };
-        meeting.update(jsonCreateMeeting._id, jsonUpdateMeeting, function (err, res) {
-            expect(res.status).to.equal(status.OK);
-            done();
+        it('GET/services/{serviceId}/rooms/{roomId}/meetings/{meetingId}', function (done) {
+            meeting.getById(serviceId, roomId, jsonPostMeeting._id, function (err, res) {
+                expect(res.status).to.equal(status.OK);
+                done();
+            });
         });
-    });
 
-    it('POST /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
-        room.getRoomByDefault(function (oneRoom) {
-            var roomIdPost = oneRoom._id;
-            var serviceIdPost = oneRoom.serviceId;
-            jsonPostMeeting = {
-                start: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-                end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        it('GET /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
+            meeting.get(serviceId, roomId, function (err, res) {
+                expect(res.status).to.equal(status.OK);
+                done();
+            });
+        });
+
+        it('PUT /services/{serviceId}/rooms/{roomId}/meetings/{meetingId}', function (done) {
+            var jsonUpdateMeeting = {
+                start: moment().add(time.ADDFROM, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+                end: moment().add(time.ADDTO, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
                 title: title,
                 optionalAttendees: [],
-                attendees: ["eviraca@group1.local"]
+                attendees: ["Administrator@jofo.local"]
             };
-            meeting.create(serviceIdPost, roomIdPost, jsonPostMeeting, function (err, res) {
+            meeting.update(serviceId, roomId, jsonPostMeeting._id, jsonUpdateMeeting, function (err, res) {
                 expect(res.status).to.equal(status.OK);
                 done();
             });
         });
+
+        it('DELETE /services/{serviceId}/rooms/{roomId}/meetings/{meetingId}', function (done) {
+            if (jsonPostMeeting._id) {
+                meeting.delete(serviceId, roomId, jsonPostMeeting._id, function (err, res) {
+                    expect(res.status).to.equal(status.OK);
+                    jsonPostMeeting._id = undefined;
+                    done();
+                });
+            }
+        })
     });
-
-    it('DELETE /services/{serviceId}/rooms/{roomId}/meetings/{meetingId}', function (done) {
-        if (jsonCreateMeeting) {
-            meeting.delete(jsonCreateMeeting._id, function (err, res) {
-                expect(res.status).to.equal(status.OK);
-                done();
-            });
-        }
-
-    });
-
 });
+
+
+
+
