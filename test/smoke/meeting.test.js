@@ -17,7 +17,7 @@ var length = 4;
 var startTime = 1;
 var endTime = 2;
 
-describe.only('Meetings Smoke Test:', function () {
+describe('Meetings Smoke Test:', function () {
     this.timeout(config.timeout);
     var jsonPostMeeting = null;
     var serviceId = 0;
@@ -41,6 +41,7 @@ describe.only('Meetings Smoke Test:', function () {
         room.getRoomByDefault(function (oneRoom) {
             roomId = oneRoom._id;
             serviceId = oneRoom.serviceId;
+            console.log(serviceId, roomId);
             done();
         })
     })
