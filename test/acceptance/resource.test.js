@@ -10,7 +10,7 @@ var resource = endPointManager.getResource();
 var resources = resourceManager.getResources();
 var status = resourceManager.getStatus();
 
-describe ('Resources Aceptance Test', function () {
+describe('Resources Aceptance Test', function () {
 	this.timeout(config.timeout);
 	var resourceJson = {};
 	var resourceJsonUpdate = {};

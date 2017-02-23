@@ -8,7 +8,7 @@ var service = endPointManager.getService();
 var config = requireManager.getRequireConfig();
 var status = resourceManager.getStatus();
 
-describe ('Service Acceptance Test', function (){
+describe.skip('Service Acceptance Test', function (){
 	this.timeout(config.timeout);
 	var idService = {};
 	var firstService = {};

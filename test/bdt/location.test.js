@@ -23,7 +23,7 @@ var length = 5;
 describe('Location Bdt Test:', function () {
     this.timeout(config.timeout);
     context('Scenario 1: Verify that a location is associate with a room', function () {
-        var roomObtenido = {};
+        var getRoom = {};
         var jsonCreateLocation = {};
         var jsonPutRoom = {};
         var name = randomstring.generate({length: length, charset: 'alphabetic'});
@@ -41,9 +41,8 @@ describe('Location Bdt Test:', function () {
         });
 
         it('Given I have a room', function (done) {
-            room.getRoomById(function (err, res) {
-                roomObtenido = res.body;
-                expect(res.status).to.equal(status.OK);
+            room.getRoomByDefault(function (room) {
+                getRoom = room;
                 done();
             });
         });
@@ -67,7 +66,7 @@ describe('Location Bdt Test:', function () {
                 locationId: jsonCreateLocation._id,
                 code: description
             };
-            room.update(jsonPutRoom, function (err, res) {
+            room.update(getRoom._id ,jsonPutRoom, function (err, res) {
                 jsonPutRoom = res.body;
                 expect(res.status).to.equal(status.OK);
                 done();
@@ -75,9 +74,9 @@ describe('Location Bdt Test:', function () {
         });
 
         it('Then ensure locationTest is assign in the roomTest', function (done) {
-            room.getRoomById(function (err, res) {
+            room.getRoom(getRoom._id ,function (err, res) {
                 expect(res.status).to.equal(status.OK);
-                expect(jsonCreateLocation._id).to.equal(jsonPutRoom.locationId);
+                expect(jsonCreateLocation._id).to.equal(res.body.locationId);
                 done();
             });
         });

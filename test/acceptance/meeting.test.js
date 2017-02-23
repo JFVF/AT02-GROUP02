@@ -14,7 +14,7 @@ var startTime = 1;
 var endTime = 2;
 var quantity = 1;
 
-describe('Meetings Acceptance Test:', function () {
+describe.skip('Meetings Acceptance Test:', function () {
     this.timeout(config.timeout);
     var jsonCreateMeeting = {};
     var organizer = randomstring.generate({length: length, charset: 'alphabetic'});
@@ -103,7 +103,7 @@ describe('Meetings Acceptance Test:', function () {
             end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
             title: title,
             optionalAttendees: [],
-            attendees: ["eviraca@group1.local"]
+            attendees: [config.attendee]
         };
         meeting.create(jsonPostMeeting, function (err, res) {
             jsonPostMeeting = res.body;

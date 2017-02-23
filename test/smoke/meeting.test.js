@@ -41,7 +41,6 @@ describe('Meetings Smoke Test:', function () {
         room.getRoomByDefault(function (oneRoom) {
             roomId = oneRoom._id;
             serviceId = oneRoom.serviceId;
-            console.log(serviceId, roomId);
             done();
         })
     })
