@@ -21,7 +21,7 @@ describe('Out-of-orders Acceptance Test', function () {
 	var OutOfOrder = {};
 
 	beforeEach(function(done){
-		room.getOneRoomExistent(function(oneRoom){
+		room.getRoomByDefault(function(oneRoom){
 			var outOfOrdersJson = {
 				roomId : oneRoom._id,
 				from : moment().add(constant.ADDFROM, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
@@ -108,7 +108,7 @@ describe('Out-of-orders Acceptance Test', function () {
 	});
 
 	it('POST /services/{serviceId}/rooms/{roomId}/out-of-orders', function(done){
-		room.getOneRoomExistent(function(oneRoom){
+		room.getRoomByDefault(function(oneRoom){
 			var outOfOrdersJsonPost = {
 				roomId : oneRoom._id,
 				from : moment().add(constant.ADDFROM, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),

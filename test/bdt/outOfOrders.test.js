@@ -26,7 +26,7 @@ describe('Out-of-orders Bdt Test', function () {
 		var OutOfOrder = {};
 
 		it('Given I get an existent \'Room\'',function(done){
-			room.getOneRoomExistent(function(oneRoom){
+			room.getRoomByDefault(function(oneRoom){
 				Room =  oneRoom;
 				done();
 			});
@@ -75,7 +75,7 @@ Scenario 2: Verify an out-of-order deleted not exist more.
 		var OutOfOrder = {};
 
 		it('Given I create an \'out-of-order\'',function(done){
-			room.getOneRoomExistent(function(oneRoom){
+			room.getRoomByDefault(function(oneRoom){
 				var outOfOrderJson = {
 					roomId : oneRoom._id,
 					from : "2017-09-03T22:30:00.000Z",

@@ -8,7 +8,7 @@ var attendee = endPointManager.getAttendee();
 var config = resourceManager.getConfig();
 var status = resourceManager.getStatus();
 
-describe('Attendee Acceptance Test', function(){
+describe.skip('Attendee Acceptance Test', function(){
 	this.timeout(config.timeout);
 	var attendeeJson = {};
 	var arrayAttendee;

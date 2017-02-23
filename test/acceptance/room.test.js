@@ -8,7 +8,7 @@ var room = endPointManager.getRoom();
 var config = requireManager.getRequireConfig();;
 var status = resourceManager.getStatus();
 
-describe ('Rooms Acceptance Test', function(){
+describe.skip('Rooms Acceptance Test', function(){
 	this.timeout(config.timeout);
 	var defaultRoom;
 	
@@ -27,7 +27,7 @@ describe ('Rooms Acceptance Test', function(){
 		var roomJsonUpdate = {
 			enabled : true,
 			location : 'string',
-			customDisplayName : 'Room 002',
+			customDisplayName : defaultRoom.customDisplayName,
 			code : 'string'
 		};
 		room.update(defaultRoom._id, roomJsonUpdate, function(err, res){

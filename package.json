@@ -8,7 +8,8 @@
     "smoke": "mocha test/smoke --recursive",
     "acceptance": "mocha test/acceptance --recursive",
     "bdt": "mocha test/bdt --recursive",
-    "workflow": "mocha test/workflow --recursive"
+    "workflow": "mocha test/workflow --recursive",
+    "reports": "mocha --recursive --reporter xunit-file test/"
   },
   "author": "AT01-Team1-JAJED",
   "license": "ISC",

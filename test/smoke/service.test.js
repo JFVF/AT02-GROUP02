@@ -8,7 +8,7 @@ var service = endPointManager.getService();
 var config = requireManager.getRequireConfig();
 var status = resourceManager.getStatus();
 
-describe('Service Smoke Test', function () {
+describe.skip('Service Smoke Test', function () {
 	this.timeout(config.timeout);
 	var servicePost = {};
 	var serviceJson = {  "username": config.userExchange,
