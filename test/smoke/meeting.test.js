@@ -24,35 +24,35 @@ describe('Meetings Smoke Test:', function () {
     var roomId = 0;
 
     var title = randomstring.generate({length: length, charset: 'alphabetic'});
-    var location = randomstring.generate({length: length, charset: 'alphabetic'});
+        var location = randomstring.generate({length: length, charset: 'alphabetic'});
 
-    jsonPostMeeting = {
-        organizer: config.userExchange,
-        title: title,
-        start: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-        end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-        location: location,
-        roomEmail: config.emailRoom,
-        resources: [config.emailRoom],
-        attendees: [config.attendee]
-    };
+        jsonPostMeeting = {
+            organizer: config.userExchange,
+            title: title,
+            start: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+            end: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+            location: location,
+            roomEmail: config.emailRoom,
+            resources: [config.emailRoom],
+            attendees: [config.attendee]
+        };
 
-    before(function (done) {
-        room.getRoomByDefault(function (oneRoom) {
-            roomId = oneRoom._id;
-            serviceId = oneRoom.serviceId;
-            done();
-        })
-    })
-    afterEach(function (done) {
-        if (jsonPostMeeting._id) {
-            meeting.delete(serviceId, roomId, jsonPostMeeting._id, function (err, res) {
-                expect(res.status).to.equal(status.OK);
+        before(function (done) {
+            room.getRoomByDefault(function (oneRoom) {
+                roomId = oneRoom._id;
+                serviceId = oneRoom.serviceId;
                 done();
-            });
-        } else {
-            done();
-        }
+            })
+        })
+        afterEach(function (done) {
+            if (jsonPostMeeting._id) {
+                meeting.delete(serviceId, roomId, jsonPostMeeting._id, function (err, res) {
+                    expect(res.status).to.equal(status.OK);
+                    done();
+                });
+            } else {
+                done();
+            }
     });
     context('POST test', function (done) {
         it('POST /services/{serviceId}/rooms/{roomId}/meetings', function (done) {
