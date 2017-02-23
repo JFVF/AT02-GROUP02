@@ -19,7 +19,7 @@ var endTime = 2;
  Feature: Meeting
 */
 
-describe.skip('Meeting Bdt Test:', function () {
+describe('Meeting Bdt Test:', function () {
     this.timeout(config.timeout);
     /*
      Scenario 1: Verify that you can not create meetings with a nonexistent account.
@@ -27,7 +27,7 @@ describe.skip('Meeting Bdt Test:', function () {
      When I have a meeting into the room with a nonexistent account.
      Then ensure that the meeting wasnt created
      */
-    context('Scenario 1: Verify that you can not create meetings with a nonexistent account.', function () {
+    context('Scenario 1: Verify that you can not create meetings wrong dates.', function () {
         var getRoom = {};
         var jsonPostMeeting = {};
         var organizer = randomstring.generate({length: length, charset: 'alphabetic'});
@@ -40,26 +40,24 @@ describe.skip('Meeting Bdt Test:', function () {
                 done();
             });
         });
-        it('When I have a meeting into the room with a nonexistent account', function (done) {
+        it('When I try to create a meeting with wrong end and start date', function (done) {
             jsonPostMeeting = {
                 organizer: config.userExchange,
                 title: title,
-                start : moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-                end : moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+                start: moment().add(endTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+                end: moment().add(startTime, 'hours').utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
                 location: location,
-                roomEmail: 'room001@group1.local',
-                resources: ["room001@group1.local"],
-                attendees: ["eviraka@group1.local"]
+                roomEmail: config.emailRoom,
+                resources: [config.emailRoom],
+                attendees: [config.attendee]
             };
             meeting.create(getRoom.serviceId, getRoom._id ,jsonPostMeeting, function (err, res) {
-                jsonPostMeeting = res.body;
-                console.log(jsonPostMeeting)
-                expect(res.status).to.equal(status.UNAUTHORIZED);
+                expect(res.status).to.equal(status.CONFLICT);
                 done();
             });
         });
-        it('Then ensure that the meeting wasnt created', function (done) {
-            meeting.getById(jsonPostMeeting._id,function (err, res) {
+        it('Then ensure that the meeting was not created', function (done) {
+            meeting.getById(getRoom.serviceId, getRoom._id ,jsonPostMeeting._id,function (err, res) {
                 expect(res.status).to.equal(status.NOT_FOUND);
                 done();
             });
