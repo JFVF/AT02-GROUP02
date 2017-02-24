@@ -139,38 +139,33 @@ npm install
 ## Running the tests
 
 To run each automated test:
-*All test:
-    npm test
-*Smoke test:
-    npm smoke
-*Acceptance test:
-    npm acceptance
-*BDT test:
-    npm bdt
-*Workflow test:
-    npm workflow
-*Generate xunit-file reports:
-    npm reports
+
+	*All test: npm test
+	*Smoke test: npm smoke
+	*Acceptance test: npm acceptance
+	*BDT test: npm bdt
+	*Workflow test: npm workflow
+	*To generate reports: npm report
 
 ### Refactor TESTS
 
 ISSUES
 
-Test Cases	| Passed	| Failed	| Total
-Smoke Test	|	18		| 18		| 36
-Acceptance	|	15		| 18		| 33
-BDT			|	8		| 15		| 23
-Workflow	|	2		| 5			| 7
-Total		|	43		| 56		| 99
-
+	Test Cases|Passed|Failed|Total
+	Smoke Test|18	 |18	|36
+	Acceptance|15	 |18	|33
+	BDT	 	  |8	 |15	|23
+	Workflow  |2	 |5		|7
+	Total	  |43	 |56	|99
+	
 REFACTOR
 
-Test Cases	| Passed	| Failed	| Skipped	| Total
-Smoke Test	|	31		|	0		|	5		|	36
-Acceptance	|	30		|	0		|	3		|	33
-BDT			|	23		|	0		|	0		|	23
-Workflow	|	7		|	0		|	0		|	7
-Total		|	91		|	0		|	8		|	99
+	Test Cases	| Passed | Failed | Skipped | Total
+	Smoke Test	|31		 |0		  |5	    |	36
+	Acceptance	|30		 |0		  |3	    |	33
+	BDT			|23		 |0		  |0	    |	23
+	Workflow	|7		 |0		  |0	    |	7
+	Total		|91		 |0		  |8	    |	99
 
 
 ## Deployment
